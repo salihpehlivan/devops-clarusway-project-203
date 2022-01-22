@@ -12,7 +12,7 @@ terraform {
 }
 
 provider "github" {
-    token = "xxx"
+    token = "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"
 }
 
 provider "aws" {
@@ -65,7 +65,7 @@ resource "aws_instance" "tf-docker-ec2" {
             -o /usr/local/bin/docker-compose
             chmod +x /usr/local/bin/docker-compose
             mkdir -p /home/ec2-user/bookstore-api
-            TOKEN="xxx"
+            TOKEN="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"
             FOLDER="https://$TOKEN@raw.githubusercontent.com/salihpehlivan/devops-clarusway-project-203-autocreated-by-TF/main"
             curl -s --create-dirs -o "/home/ec2-user/bookstore-api/app.py" -L "$FOLDER"bookstore-api.py
             curl -s --create-dirs -o "/home/ec2-user/bookstore-api/requirements.txt" -L "$FOLDER"requirements.py
