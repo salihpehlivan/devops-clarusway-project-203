@@ -12,7 +12,7 @@ terraform {
 }
 
 provider "github" {
-    token = "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"
+    token = "xxx"
 }
 
 provider "aws" {
@@ -20,7 +20,7 @@ provider "aws" {
 }
 
 resource "github_repository" "myrepo" {
-  name = "devops-clarusway-project-203"
+  name = "devops-clarusway-project-203-autocreated-by-TF"
   auto_init = true
   visibility = "public"
 }
@@ -65,8 +65,8 @@ resource "aws_instance" "tf-docker-ec2" {
             -o /usr/local/bin/docker-compose
             chmod +x /usr/local/bin/docker-compose
             mkdir -p /home/ec2-user/bookstore-api
-            TOKEN="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"
-            FOLDER="https://$TOKEN@raw.githubusercontent.com/salihpehlivan/devops-clarusway-project-203/main"
+            TOKEN="xxx"
+            FOLDER="https://$TOKEN@raw.githubusercontent.com/salihpehlivan/devops-clarusway-project-203-autocreated-by-TF/main"
             curl -s --create-dirs -o "/home/ec2-user/bookstore-api/app.py" -L "$FOLDER"bookstore-api.py
             curl -s --create-dirs -o "/home/ec2-user/bookstore-api/requirements.txt" -L "$FOLDER"requirements.py
             curl -s --create-dirs -o "/home/ec2-user/bookstore-api/Dockerfile" -L "$FOLDER"Dockerfile
@@ -75,6 +75,7 @@ resource "aws_instance" "tf-docker-ec2" {
             docker build -t dockerforpehlivan/bookstoreapi:latest .
             docker-compose up -d
             EOF
+    depends_on = [github_repository.myrepo, github_repository_file.app-files]
 }
 
 
